@@ -1,0 +1,6 @@
+@ETAPI_HostAddress = http://localhost:5111
+
+GET {{ETAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
