@@ -1,4 +1,6 @@
 using ETAPI.Data;
+using ETAPI.Repositories;
+using ETAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
 builder.Services.AddCors(options =>
 {
