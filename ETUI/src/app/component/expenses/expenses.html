@@ -1,1 +1,147 @@
-<p>expenses works!</p>
+<div class="page-header">
+  <h2>Expenses</h2>
+</div>
+
+<div class="form-card">
+
+  <div class="form-group">
+    <label>Title</label>
+
+    <input
+      type="text"
+      [(ngModel)]="expense.title"
+      placeholder="Enter expense title">
+  </div>
+
+  <div class="form-group">
+    <label>Amount</label>
+
+    <input
+      type="number"
+      [(ngModel)]="expense.amount"
+      placeholder="Enter amount">
+  </div>
+
+  <div class="form-group">
+    <label>Category</label>
+
+    <select [(ngModel)]="expense.categoryId">
+
+      <option [ngValue]="0">
+        Select Category
+      </option>
+
+      @for (category of categories; track category.id) {
+
+        <option [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+
+      }
+
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Payment Methods</label>
+
+    <select
+      multiple
+      [(ngModel)]="expense.paymentMethods">
+
+      <option value="Cash">Cash</option>
+      <option value="UPI">UPI</option>
+      <option value="Card">Card</option>
+
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Expense Date</label>
+
+    <input
+      type="date"
+      [(ngModel)]="expense.expenseDate">
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+
+    <textarea
+      [(ngModel)]="expense.description"
+      placeholder="Enter description">
+    </textarea>
+  </div>
+
+  <button
+    class="primary-button"
+    (click)="addExpense()">
+    {{ editingExpenseId === null ? 'Add Expense' : 'Update Expense' }}
+  </button>
+
+  @if (editingExpenseId !== null) {
+    <button class="delete-button" (click)="resetForm()">Cancel</button>
+  }
+
+</div>
+
+<div class="table-container">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>Title</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Payment</th>
+        <th>Action</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      @for (expense of expenses; track expense.id) {
+
+        <tr>
+
+          <td>{{ expense.title }}</td>
+
+          <td>₹{{ expense.amount }}</td>
+
+          <td>{{ expense.categoryName }}</td>
+
+          <td>{{ expense.expenseDate }}</td>
+
+          <td>
+            {{ expense.paymentMethods.join(', ') }}
+          </td>
+
+          <td>
+
+            <button
+              class="primary-button"
+              (click)="editExpense(expense)">
+              Edit
+            </button>
+
+            <button
+              class="delete-button"
+              (click)="deleteExpense(expense.id)">
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>

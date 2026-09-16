@@ -1,1 +1,47 @@
-<p>categories works!</p>
+<div class="page-header">
+    <h2>Categories</h2>
+</div>
+
+<div class="form-card">
+
+    <div class="form-group">
+        <label>Category Name</label>
+        <input type="text" [(ngModel)]="category.name" placeholder="Enter category name">
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="category.description" placeholder="Enter description"></textarea>
+    </div>
+
+    <button class="primary-button" (click)="addCategory()">
+        {{ editingCategoryId === null ? 'Add Category' : 'Update Category' }}
+    </button>
+    @if (editingCategoryId !== null) {
+        <button class="delete-button" (click)="resetForm()">Cancel</button>
+    }
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    <button class="primary-button" (click)="editCategory(category)">Edit</button>
+                    <button class="delete-button" (click)="deleteCategory(category.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,1 +1,132 @@
-<p>income works!</p>
+<div class="page-header">
+  <h2>Income</h2>
+</div>
+
+<div class="form-card">
+
+  <div class="form-group">
+    <label>Source</label>
+
+    <input
+      type="text"
+      [(ngModel)]="income.source"
+      placeholder="Enter income source">
+  </div>
+
+  <div class="form-group">
+    <label>Amount</label>
+
+    <input
+      type="number"
+      [(ngModel)]="income.amount"
+      placeholder="Enter amount">
+  </div>
+
+  <div class="form-group">
+    <label>Income Type</label>
+
+    <select [(ngModel)]="income.incomeType">
+
+      <option value="">
+        Select Income Type
+      </option>
+
+      <option value="Salary">
+        Salary
+      </option>
+
+      <option value="Freelance">
+        Freelance
+      </option>
+
+      <option value="Business">
+        Business
+      </option>
+
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Income Date</label>
+
+    <input
+      type="date"
+      [(ngModel)]="income.incomeDate">
+  </div>
+
+  <div class="form-group">
+    <label>Description</label>
+
+    <textarea
+      [(ngModel)]="income.description"
+      placeholder="Enter description">
+    </textarea>
+  </div>
+
+  <button
+    class="success-button"
+    (click)="addIncome()">
+    {{ editingIncomeId === null ? 'Add Income' : 'Update Income' }}
+  </button>
+
+  @if (editingIncomeId !== null) {
+    <button class="delete-button" (click)="resetForm()">Cancel</button>
+  }
+
+</div>
+
+<div class="table-container">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>Source</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      @for (income of incomes; track income.id) {
+
+        <tr>
+
+          <td>{{ income.source }}</td>
+
+          <td>₹{{ income.amount }}</td>
+
+          <td>{{ income.incomeType }}</td>
+
+          <td>{{ income.incomeDate }}</td>
+
+          <td>
+
+            <button
+              class="success-button"
+              (click)="editIncome(income)">
+              Edit
+            </button>
+
+            <button
+              class="delete-button"
+              (click)="deleteIncome(income.id)">
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>

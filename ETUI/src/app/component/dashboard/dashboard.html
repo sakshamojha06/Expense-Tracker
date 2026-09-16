@@ -1,1 +1,22 @@
-<p>dashboard works!</p>
+<div class="dashboard-header">
+  <h2>Dashboard</h2>
+</div>
+
+<div class="dashboard-cards">
+
+  <div class="dashboard-card">
+    <h3>Total Income</h3>
+    <p>₹{{ totalIncome() }}</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Total Expense</h3>
+    <p>₹{{ totalExpense() }}</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>Balance</h3>
+    <p>₹{{ balance() }}</p>
+  </div>
+
+</div>
