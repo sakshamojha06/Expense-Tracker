@@ -58,7 +58,7 @@ namespace ETAPI.Controllers
                 return BadRequest();
             }
 
-            await _expenseService.UpdateAsync(expense);
+            await _expenseService.UpdateAsync(id, expense);
             return NoContent();
         }
 
