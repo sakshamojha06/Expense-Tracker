@@ -40,7 +40,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Urls.Any(url => url.StartsWith("https://", StringComparison.OrdinalIgnoreCase)))
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseCors("AllowAngular");
 
