@@ -7,7 +7,7 @@ import { Income } from '../models/income';
   providedIn: 'root'
 })
 export class IncomeService {
-    private apiUrl = 'http://localhost:5111/api/Income';
+    private apiUrl = 'https://c26a-223-235-101-20.ngrok-free.app/api/Income';
 
   constructor(private http: HttpClient) {}
 

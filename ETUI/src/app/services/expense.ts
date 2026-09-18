@@ -7,7 +7,7 @@ import { Expense } from '../models/expense';
   providedIn: 'root'
 })
 export class ExpenseService {
-    private apiUrl = 'http://localhost:5111/api/Expense';
+    private apiUrl = 'https://c26a-223-235-101-20.ngrok-free.app/api/Expense';
 
   constructor(private http: HttpClient) {}
 

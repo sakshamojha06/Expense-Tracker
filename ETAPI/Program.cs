@@ -24,7 +24,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
@@ -45,7 +45,9 @@ if (app.Urls.Any(url => url.StartsWith("https://", StringComparison.OrdinalIgnor
     app.UseHttpsRedirection();
 }
 
-app.UseCors("AllowAngular");
+app.UseCors("AllowFrontend");
+
+app.UseAuthorization();
 
 app.MapControllers();
 
