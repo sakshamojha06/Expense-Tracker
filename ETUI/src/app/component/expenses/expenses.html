@@ -104,7 +104,7 @@
 
     <tbody>
 
-      @for (expense of expenses; track expense.id) {
+      @for (expense of visibleExpenses; track expense.id) {
 
         <tr>
 
@@ -145,3 +145,11 @@
   </table>
 
 </div>
+
+@if (expenses.length > pageSize) {
+<div class="pagination">
+  <button class="primary-button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button class="primary-button" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+}

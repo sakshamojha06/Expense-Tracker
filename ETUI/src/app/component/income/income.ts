@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IncomeService } from '../../services/income';
 import { Income as IncomeModel } from '../../models/income';
@@ -10,7 +10,9 @@ import { Income as IncomeModel } from '../../models/income';
   templateUrl: './income.html',
 })
 export class Income implements OnInit {
-incomes: IncomeModel[] = [];
+  incomes: IncomeModel[] = [];
+  currentPage = 1;
+  readonly pageSize = 25;
 
   income = {
     id: 0,
@@ -24,7 +26,8 @@ incomes: IncomeModel[] = [];
   editingIncomeId: number | null = null;
 
   constructor(
-    private incomeService: IncomeService
+    private incomeService: IncomeService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +41,27 @@ incomes: IncomeModel[] = [];
       .subscribe(data => {
 
         this.incomes = data;
+        this.currentPage = 1;
+        this.changeDetector.markForCheck();
 
       });
+  }
+
+  get visibleIncomes(): IncomeModel[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.incomes.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.incomes.length / this.pageSize));
+  }
+
+  previousPage(): void {
+    this.currentPage = Math.max(1, this.currentPage - 1);
+  }
+
+  nextPage(): void {
+    this.currentPage = Math.min(this.totalPages, this.currentPage + 1);
   }
 
   addIncome(): void {

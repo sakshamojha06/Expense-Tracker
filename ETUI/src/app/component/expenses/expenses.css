@@ -61,6 +61,23 @@
   overflow-x: auto;
 }
 
+.table-container td button + button {
+  margin-left: 8px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

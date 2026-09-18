@@ -93,7 +93,7 @@
 
     <tbody>
 
-      @for (income of incomes; track income.id) {
+      @for (income of visibleIncomes; track income.id) {
 
         <tr>
 
@@ -130,3 +130,11 @@
   </table>
 
 </div>
+
+@if (incomes.length > pageSize) {
+<div class="pagination">
+  <button class="success-button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button class="success-button" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+}

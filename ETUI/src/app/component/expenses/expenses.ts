@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Expense } from '../../models/expense';
 import { ExpenseService } from '../../services/expense';
@@ -15,6 +15,8 @@ import { Category } from '../../models/category';
 })
 export class Expenses implements OnInit {
   expenses: Expense[] = [];
+  currentPage = 1;
+  readonly pageSize = 25;
 
   categories: Category[] = [];
 
@@ -33,7 +35,8 @@ export class Expenses implements OnInit {
 
   constructor(
     private expenseService: ExpenseService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -48,8 +51,27 @@ export class Expenses implements OnInit {
       .subscribe(data => {
 
         this.expenses = data;
+        this.currentPage = 1;
+        this.changeDetector.markForCheck();
 
       });
+  }
+
+  get visibleExpenses(): Expense[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.expenses.slice(start, start + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.expenses.length / this.pageSize));
+  }
+
+  previousPage(): void {
+    this.currentPage = Math.max(1, this.currentPage - 1);
+  }
+
+  nextPage(): void {
+    this.currentPage = Math.min(this.totalPages, this.currentPage + 1);
   }
 
   loadCategories(): void {
@@ -59,6 +81,7 @@ export class Expenses implements OnInit {
       .subscribe(data => {
 
         this.categories = data;
+        this.changeDetector.markForCheck();
 
       });
   }
