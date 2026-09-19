@@ -24,9 +24,7 @@ namespace ETAPI.Services
                 CategoryId = e.CategoryId,
                 CategoryName = e.Category?.Name ?? string.Empty,
                 ExpenseDate = e.ExpenseDate,
-                PaymentMethods = string.IsNullOrWhiteSpace(e.PaymentMethods)
-                    ? []
-                    : e.PaymentMethods.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList(),
+                PaymentMethod = e.PaymentMethods,
                 Description = e.Description
             }).ToList();
         }
@@ -47,9 +45,7 @@ namespace ETAPI.Services
                 CategoryId = expense.CategoryId,
                 CategoryName = expense.Category?.Name ?? string.Empty,
                 ExpenseDate = expense.ExpenseDate,
-                PaymentMethods = string.IsNullOrWhiteSpace(expense.PaymentMethods)
-                    ? []
-                    : expense.PaymentMethods.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList(),
+                PaymentMethod = expense.PaymentMethods,
                 Description = expense.Description
             };
         }

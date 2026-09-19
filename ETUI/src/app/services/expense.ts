@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Expense } from '../models/expense';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpenseService {
-    private apiUrl = 'https://2b10-223-235-98-218.ngrok-free.app/api/Expense';
+    private apiUrl = `${environment.apiUrl}/Expense`;
 
   constructor(private http: HttpClient) {}
 

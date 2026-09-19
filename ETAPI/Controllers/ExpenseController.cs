@@ -43,7 +43,7 @@ namespace ETAPI.Controllers
                 Amount = expenseDto.Amount,
                 CategoryId = expenseDto.CategoryId,
                 ExpenseDate = expenseDto.ExpenseDate,
-                PaymentMethods = string.Join(",", expenseDto.PaymentMethods),
+                PaymentMethods = expenseDto.PaymentMethod,
                 Description = expenseDto.Description
             };
             var createdExpense = await _expenseService.CreateAsync(expense);
@@ -51,12 +51,18 @@ namespace ETAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Expense expense)
+        public async Task<IActionResult> Update(int id, ExpenseCreateDto expenseDto)
         {
-            if (id != expense.Id)
+            var expense = new Expense
             {
-                return BadRequest();
-            }
+                Id = id,
+                Title = expenseDto.Title,
+                Amount = expenseDto.Amount,
+                CategoryId = expenseDto.CategoryId,
+                ExpenseDate = expenseDto.ExpenseDate,
+                PaymentMethods = expenseDto.PaymentMethod,
+                Description = expenseDto.Description
+            };
 
             await _expenseService.UpdateAsync(id, expense);
             return NoContent();

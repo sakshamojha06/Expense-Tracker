@@ -5,6 +5,6 @@ export interface Expense {
     categoryId: number;
     categoryName: string;
     expenseDate: string;
-    paymentMethods: string[];
+    paymentMethod: string;
     description: string;
 }

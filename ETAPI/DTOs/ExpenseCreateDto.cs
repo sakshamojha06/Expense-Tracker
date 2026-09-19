@@ -6,6 +6,6 @@ public class ExpenseCreateDto
     public decimal Amount { get; set; }
     public int CategoryId { get; set; } 
     public DateTime ExpenseDate { get; set; }
-    public List<string> PaymentMethods { get; set; } = [];
+    public string PaymentMethod { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
 }

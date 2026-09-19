@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiUrl = 'https://2b10-223-235-98-218.ngrok-free.app/api/Category';
+  private apiUrl = `${environment.apiUrl}/Category`;
 
   constructor(private http: HttpClient) {}
 

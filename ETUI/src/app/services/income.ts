@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Income } from '../models/income';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IncomeService {
-    private apiUrl = 'https://2b10-223-235-98-218.ngrok-free.app/api/Income';
+    private apiUrl = `${environment.apiUrl}/Income`;
 
   constructor(private http: HttpClient) {}
 

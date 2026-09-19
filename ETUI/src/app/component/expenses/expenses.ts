@@ -4,11 +4,10 @@ import { Expense } from '../../models/expense';
 import { ExpenseService } from '../../services/expense';
 import { CategoryService } from '../../services/category';
 import { Category } from '../../models/category';
-
-
+import { DatePipe } from '@angular/common';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   selector: 'app-expenses',
   styleUrl: './expenses.css',
   templateUrl: './expenses.html',
@@ -27,7 +26,7 @@ export class Expenses implements OnInit {
     categoryId: 0,
     categoryName: '',
     expenseDate: '',
-    paymentMethods: [] as string[],
+    paymentMethod: '',
     description: ''
   };
 
@@ -95,7 +94,7 @@ export class Expenses implements OnInit {
       categoryId: this.expense.categoryId,
       categoryName: this.expense.categoryName,
       expenseDate: this.expense.expenseDate,
-      paymentMethods: this.expense.paymentMethods,
+      paymentMethod: this.expense.paymentMethod,
       description: this.expense.description
     };
 
@@ -115,7 +114,7 @@ export class Expenses implements OnInit {
     this.expense = {
       ...expense,
       expenseDate: expense.expenseDate.substring(0, 10),
-      paymentMethods: [...expense.paymentMethods]
+      paymentMethod: expense.paymentMethod
     };
   }
 
@@ -128,7 +127,7 @@ export class Expenses implements OnInit {
       categoryId: 0,
       categoryName: '',
       expenseDate: '',
-      paymentMethods: [],
+      paymentMethod: '',
       description: ''
     };
   }

@@ -43,12 +43,12 @@
   </div>
 
   <div class="form-group">
-    <label>Payment Methods</label>
+    <label>Payment Method</label>
 
     <select
-      multiple
-      [(ngModel)]="expense.paymentMethods">
+      [(ngModel)]="expense.paymentMethod">
 
+      <option value="">Select Payment Method</option>
       <option value="Cash">Cash</option>
       <option value="UPI">UPI</option>
       <option value="Card">Card</option>
@@ -114,10 +114,10 @@
 
           <td>{{ expense.categoryName }}</td>
 
-          <td>{{ expense.expenseDate }}</td>
+          <td>{{ expense.expenseDate | date:'dd/MM/yyyy'}}</td>
 
           <td>
-            {{ expense.paymentMethods.join(', ') }}
+            {{ expense.paymentMethod }}
           </td>
 
           <td>

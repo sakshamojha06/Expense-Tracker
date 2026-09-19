@@ -2,9 +2,10 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IncomeService } from '../../services/income';
 import { Income as IncomeModel } from '../../models/income';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  imports: [FormsModule],
+  imports: [FormsModule, DatePipe],
   selector: 'app-income',
   styleUrl: './income.css',
   templateUrl: './income.html',
